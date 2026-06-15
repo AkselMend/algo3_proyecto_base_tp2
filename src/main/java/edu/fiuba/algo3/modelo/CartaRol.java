@@ -26,7 +26,7 @@ public abstract class CartaRol implements RolNocturno, RolDiurno{
 
     protected void chequearDefunsion(Jugador elegido){
         if(!elegido.estaVivo()){
-            throw new JugadorMuertoException();
+            throw new NominadoMuertoException();
         }
     }
 }

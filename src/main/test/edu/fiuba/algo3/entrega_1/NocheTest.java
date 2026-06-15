@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import edu.fiuba.algo3.modelo.Ciudadano;
 import edu.fiuba.algo3.modelo.Detective;
+import edu.fiuba.algo3.modelo.Dia;
 import edu.fiuba.algo3.modelo.Eleccion;
 import edu.fiuba.algo3.modelo.InvestigadoRepetidoException;
 import edu.fiuba.algo3.modelo.Jugador;
+import edu.fiuba.algo3.modelo.JugadorMuertoException;
 import edu.fiuba.algo3.modelo.Mafioso;
 import edu.fiuba.algo3.modelo.Medico;
 import edu.fiuba.algo3.modelo.Noche;
@@ -210,6 +212,41 @@ public class NocheTest {
         assertThrows(
                 ProtegidoRepetidoException.class,
                 () -> rolDeRaul.rolearDeNoche(jugadores)
+        );
+    }
+
+    @Test
+    public void test16DeNocheSiUnJugadorEliminadoIntentaHacerAlgoElSistemaRechazaLaAccion(){
+        // Arrange
+        Eleccion mockEleccionDeMafioso = new Eleccion();
+        Eleccion mockEleccionDeCiudadano = new Eleccion();
+        Jugador tomas = new Jugador("tomas", new Ciudadano(mockEleccionDeCiudadano));
+        Jugador tilemans = new Jugador("tilemans", new Ciudadano(mockEleccionDeCiudadano));
+        Jugador fede = new Jugador("fede", new Ciudadano(mockEleccionDeCiudadano));
+        Jugador facu = new Jugador("facu", new Ciudadano(mockEleccionDeCiudadano));
+        Jugador pedro = new Jugador("pedro", new Mafioso(mockEleccionDeMafioso));
+        mockEleccionDeMafioso.respuesta(tomas);
+        mockEleccionDeCiudadano.respuesta(pedro);
+        List<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(tomas);
+        jugadores.add(tilemans);
+        jugadores.add(fede);
+        jugadores.add(facu);
+        jugadores.add(pedro);
+        Noche noche = new Noche();
+        Dia dia = new Dia();
+
+        // Act
+        // TODOS ESTAN VIVOS ANTES DE ESTO
+        dia.ejecutar(jugadores);
+
+        // Assert
+        // LOS CIUDADANOS VOTARON A PEDRO
+        // EL UNICO MAFIOSO NO VA A PODER ACTUAR PORQUE ESTA MUERTO
+        // EL SISTEMA RECHA LA ACCION
+        assertThrows(
+                JugadorMuertoException.class,
+                () -> noche.ejecutar(jugadores)
         );
     }
 }
