@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Jugador {
     private String nombre;
-    private String estado = "vivo";
+    private boolean vivo = true;
     private String bando;
     private Integer votos = 0;
     private CartaRol rol;
@@ -20,16 +20,22 @@ public class Jugador {
     }
 
     public void ejecutarRolDeDiaSobre(List<Jugador> jugadores){
+        if (!vivo) {
+            throw new JugadorMuertoException();
+        } 
         rol.rolearDeDia(jugadores);
     }
 
     public void ejecutarRolDeNocheSobre(List<Jugador> jugadores){
+        if (!vivo) {
+            throw new JugadorMuertoException();
+        }
         rol.rolearDeNoche(jugadores);
     }
 
     public void mueroSiNoSoyProtegido(Jugador protegido){
         if (this != protegido) {
-            estado = "muerto";        
+            vivo = false;        
         }
     }
 
@@ -50,6 +56,6 @@ public class Jugador {
     }
 
     public boolean estaVivo(){
-        return estado.equals("vivo");
+        return vivo;
     }
 }
