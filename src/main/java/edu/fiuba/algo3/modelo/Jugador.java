@@ -5,18 +5,13 @@ import java.util.List;
 public class Jugador {
     private String nombre;
     private boolean vivo = true;
-    private String bando;
+    private boolean protegido = false;
     private Integer votos = 0;
     private CartaRol rol;
 
-    public Jugador(String nombre, String bando, CartaRol rol) {
+    public Jugador(String nombre, CartaRol rol) {
         this.nombre = nombre;
-        this.bando = bando;
         this.rol = rol;
-    }
-
-    public Jugador(String nombre, String bando) {
-        this(nombre, bando, null);
     }
 
     public void ejecutarRolDeDiaSobre(List<Jugador> jugadores){
@@ -33,9 +28,15 @@ public class Jugador {
         rol.rolearDeNoche(jugadores);
     }
 
-    public void mueroSiNoSoyProtegido(Jugador protegido){
-        if (this != protegido) {
+    public void protegerse(){
+        protegido = true;
+    }
+
+    public void recibirDisparo(){
+        if (!protegido) {
             vivo = false;        
+        } else {
+            protegido = false;
         }
     }
 
@@ -48,14 +49,20 @@ public class Jugador {
     }
 
     public boolean tengoMasVotos(Integer votos){
-        return this.votos > votos;
+        boolean respuesta = this.votos > votos;
+        votos = 0;
+        return respuesta;
     }
 
     public boolean esMafioso(){
-        return bando.equals("mafioso");
+        return rol.esMafioso();
     }
 
     public boolean estaVivo(){
         return vivo;
+    }
+
+    public String getBando(){
+        return rol.getBando();
     }
 }

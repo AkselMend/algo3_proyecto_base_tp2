@@ -3,14 +3,16 @@ package edu.fiuba.algo3.modelo;
 import java.util.List;
 
 public class Mafioso extends CartaRol{
-    
+
     public Mafioso(Eleccion eleccion) {
-        super(eleccion);
+        super("Mafia",eleccion);
     }
     
     @Override
     public void rolearDeDia(List<Jugador> jugadores){
-        // NO HACE NADA
+        Jugador sospechoso = eleccion.elegirJugadorEntre(jugadores);
+        this.chequearDefunsion(sospechoso);
+        sospechoso.agregarVoto();
     }
 
     @Override
@@ -21,8 +23,9 @@ public class Mafioso extends CartaRol{
 
     private Jugador asesinar(List<Jugador> jugadores) {
         Jugador victima = eleccion.elegirJugadorEntre(jugadores);
-        if (!victima.estaVivo() || victima.esMafioso()) {
-            throw new VictimaInvalidaException();
+        this.chequearDefunsion(victima);
+        if (victima.esMafioso()) {
+            throw new VictimaEsMafiosoException();
         }
         return victima;
     }

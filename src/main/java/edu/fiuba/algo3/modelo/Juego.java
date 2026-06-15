@@ -29,8 +29,9 @@ public class Juego {
         // Y ASIGNE ROLES
 
         // HARDCODEAMOS JUGADORES PARA QUE NO SE QUEJE
+        Eleccion eleccion = new Eleccion();
         List<Jugador> jugadores = new ArrayList<>();
-        Jugador tomas = new Jugador("tomas", "ciudadano");
+        Jugador tomas = new Jugador("tomas", new Mafioso(eleccion));
         jugadores.add(tomas);
 
         return jugadores;
