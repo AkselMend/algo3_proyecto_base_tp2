@@ -216,7 +216,7 @@ public class NocheTest {
     }
 
     @Test
-    public void test16DeNocheSiUnJugadorEliminadoIntentaHacerAlgoElSistemaRechazaLaAccion(){
+    public void test17DeNocheSiUnJugadorEliminadoIntentaHacerAlgoElSistemaRechazaLaAccion(){
         // Arrange
         Eleccion mockEleccionDeMafioso = new Eleccion();
         Eleccion mockEleccionDeCiudadano = new Eleccion();

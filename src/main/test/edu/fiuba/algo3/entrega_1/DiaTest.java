@@ -20,7 +20,7 @@ import edu.fiuba.algo3.modelo.NominadoMuertoException;
 public class DiaTest {
     
     @Test
-    public void test12DeDiaAlNominarUnMuertoElSistemaRechazaLaAccion(){
+    public void test13DeDiaAlNominarUnMuertoElSistemaRechazaLaAccion(){
         // Arrange
         Eleccion mockEleccionDeMafioso = new Eleccion();
         Eleccion mockEleccionDeCiudadano = new Eleccion();
@@ -48,7 +48,7 @@ public class DiaTest {
     }
     
     @Test
-    public void test13DeDiaElNominadoConMasVotosMuere(){
+    public void test14DeDiaElNominadoConMasVotosMuere(){
         // Arrange
         Eleccion mockEleccionDeMafioso = new Eleccion();
         Eleccion mockEleccionDeCiudadano = new Eleccion();
@@ -75,7 +75,7 @@ public class DiaTest {
     }
 
     @Test
-    public void test16DeDiaSiUnJugadorEliminadoIntentaHacerAlgoElSistemaRechazaLaAccion(){
+    public void test17DeDiaSiUnJugadorEliminadoIntentaHacerAlgoElSistemaRechazaLaAccion(){
         // Arrange
         Eleccion mockEleccionDeMafioso = new Eleccion();
         Eleccion mockEleccionDeCiudadano = new Eleccion();

@@ -49,9 +49,19 @@ public class Jugador {
     }
 
     public boolean tengoMasVotos(Integer votos){
-        boolean respuesta = this.votos > votos;
+        return this.votos > votos;
+    }
+
+    public boolean otroJugadorMeIgualaEnVotos(Jugador jugador){
+        return jugador.tengoIgualCantidadaDeVotos(votos);
+    }
+
+    public boolean tengoIgualCantidadaDeVotos(Integer votos){
+        return this.votos.equals(votos);
+    }
+
+    public void reiniciarVotos(){
         votos = 0;
-        return respuesta;
     }
 
     public boolean esMafioso(){

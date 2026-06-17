@@ -3,7 +3,12 @@ package edu.fiuba.algo3.modelo;
 import java.util.List;
 
 public class Noche implements Fase{
-    
+    //private AnalistaElectoral analistaElectoral;
+
+    //public Noche(AnalistaElectoral analistaElectoral){
+    //    this.analistaElectoral = analistaElectoral;
+    //}
+
     @Override
     public void ejecutar(List<Jugador> jugadores) {
         for (Jugador jugador : jugadores) {
@@ -11,6 +16,9 @@ public class Noche implements Fase{
         }
         Jugador jugadorConMasVotos = this.buscarMasVotado(jugadores);
         jugadorConMasVotos.recibirDisparo();
+        for (Jugador jugador : jugadores) {
+            jugador.reiniciarVotos();
+        }
     }
 
     private Jugador buscarMasVotado(List<Jugador> jugadores){
@@ -22,4 +30,15 @@ public class Noche implements Fase{
         }
         return jugadorConMasVotos;
     }
+    
+    //@Override
+    //public void ejecutar(List<Jugador> jugadores) {
+    //    for (Jugador jugador : jugadores) {
+    //        jugador.ejecutarRolDeNocheSobre(jugadores);
+    //    }
+    //    analistaElectoral.buscarMasVotado(jugadores);
+    //    for (Jugador jugador : jugadores) {
+    //        jugador.reiniciarVotos();
+    //    }
+    //}
 }
